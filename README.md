@@ -7,10 +7,6 @@ Este proyecto te permite ejecutar múltiples modelos de IA usando [Ollama](https
 - **Arquitectura simplificada**: Un solo servicio Ollama que maneja múltiples modelos
 - **Interfaz web moderna**: [Open WebUI](https://github.com/open-webui/open-webui) para gestión visual
 - **Múltiples modelos**: Soporte para 3 familias de modelos diferentes
-- **Script de gestión**: Herramienta automatizada para gestión completa
-- **Tests automáticos**: Script para probar todos los modelos disponibles
-- **Cliente SDXL**: Generación de imágenes con Stable Diffusion XL
-- **Persistencia de datos**: Los modelos se mantienen entre reinicios
 
 ## 🤖 Modelos Disponibles
 
@@ -39,11 +35,6 @@ Este proyecto te permite ejecutar múltiples modelos de IA usando [Ollama](https
 - **Ventana de contexto**: 8K
 - **Especialidad**: Crear prompts detallados para DALL-E, Midjourney, Stable Diffusion
 
-### SDXL (Stable Diffusion XL)
-- **Descripción**: Generación de imágenes de alta calidad
-- **Especialidad**: Creación de imágenes fotorealistas y artísticas
-- **Puerto**: 11439 (configurable)
-
 ## 📋 Requisitos
 
 - Docker
@@ -57,10 +48,6 @@ Este proyecto te permite ejecutar múltiples modelos de IA usando [Ollama](https
 ### 1. Inicio rápido
 
 ```bash
-# Clonar el repositorio
-git clone <repository-url>
-cd opencoder
-
 # Iniciar servicios básicos
 ./ollama.sh start
 
@@ -135,7 +122,6 @@ ENABLE_LOGIN_FORM=true
 
 - **Ollama API**: `http://localhost:11434`
 - **Open WebUI**: `http://localhost:8080`
-- **SDXL (opcional)**: `http://localhost:11439`
 
 ## 📝 Ejemplos de Uso
 
@@ -173,13 +159,6 @@ curl -X POST http://localhost:11434/api/generate \
     "prompt": "Crea un prompt para generar una imagen de un paisaje de montaña al atardecer",
     "stream": false
   }'
-```
-
-### Cliente Python - SDXL
-
-```bash
-# Generar imágenes con SDXL
-python3 example_sdxl_client.py
 ```
 
 ## 🧪 Scripts de Prueba
@@ -297,7 +276,6 @@ Si obtienes errores de memoria insuficiente:
 | DeepSeek-R1 8B | 5.2GB | 8K | Razonamiento avanzado | Problemas complejos |
 | DeepSeek-R1 32B | 20GB | 32K | Máxima precisión | Investigación |
 | GenAI Image CSPrompt | 4.7GB | 8K | Prompts para imágenes | Generación de contenido |
-| SDXL | ~6GB | - | Generación de imágenes | Arte y diseño |
 
 ## 📚 Referencias
 
