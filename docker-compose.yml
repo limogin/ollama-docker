@@ -1,0 +1,35 @@
+services:
+  # Servicio principal de Ollama que maneja múltiples modelos
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - "11434:11434"  # Puerto por defecto de Ollama
+    volumes:
+      - ./data/ollama:/root/.ollama  # Persistencia de modelos
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+      - OLLAMA_ORIGINS=*
+    #restart: unless-stopped
+
+  # Interfaz web Open WebUI para gestionar todos los modelos
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: open-webui
+    ports:
+      - "8080:8080"  # Puerto de la interfaz web
+    volumes:
+      - ./data/open-webui:/app/backend/data
+    environment:
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL}
+      - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY}
+      - DEFAULT_USER_ROLE=${DEFAULT_USER_ROLE}
+      - ENABLE_SIGNUP=${ENABLE_SIGNUP}
+      - ENABLE_LOGIN_FORM=${ENABLE_LOGIN_FORM}
+    #restart: unless-stopped
+    profiles:
+      - webui
+    depends_on:
+      - ollama
+    extra_hosts:
+      - "host.docker.internal:${HOST_IP}"
